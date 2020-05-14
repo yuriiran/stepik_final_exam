@@ -21,7 +21,6 @@ class BasePage():
         return True
     def open(self):
         self.browser.get(self.url)
-        
 # решение задачки в сплывабщем окне
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -36,7 +35,6 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
-
 #проверяет, что элемент не появляется на странице в течение заданного времени: 
     def is_not_element_present(self, how, what, timeout=4):
         try:
@@ -44,7 +42,6 @@ class BasePage():
         except TimeoutException:
             return True
         return False
-
 #проверить, что какой-то элемент исчезает
     def is_disappeared(self, how, what, timeout=4):
         try:
@@ -52,20 +49,19 @@ class BasePage():
         except TimeoutException:
             return False
         return True
-
+# переход на страницу регистрации
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
-
+# проверка ссылки
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
-
+#  откртиые корзины
     def should_enter_basket(self):
         basket = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
         basket.click()
         assert "basket" in self.browser.current_url, "Basket unavailable"
-
-    #проверка что пользователь залогинен
+#проверка что пользователь залогинен
     def should_be_authorized_user(self):
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
         " probably unauthorised user"
